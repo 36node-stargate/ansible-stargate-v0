@@ -1,0 +1,27 @@
+---
+# defaults file for stargate-v0
+
+namespace: stargate-v0
+state: present
+
+stargate_state: "{{ state }}"
+stargate_namespace: "{{ namespace }}"
+
+ingress_name: stargate
+domain: stargate.36node.com
+
+auth_version: latest
+auth_image: "registry.cn-hongkong.aliyuncs.com/36node/auth:{{ auth_version }}"
+auth_time: 20210804120000
+auth_port: "80"
+auth_path: /auth/v0
+auth_mongodb_connection: "{{ mongodb_connection }}/auth?authSource=admin"
+auth_super_username: root
+auth_super_password: 36node
+
+web_version: latest
+web_image: "registry.cn-hongkong.aliyuncs.com/36node/stargate:{{ web_version }}"
+web_time: 20210804120000
+web_auth_path: https://api.stargate.36node.com/auth/v0
+web_provider: 5cb9a4edc48ad400120d28a7
+web_health_path: /
