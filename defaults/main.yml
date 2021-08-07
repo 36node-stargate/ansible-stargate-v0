@@ -19,6 +19,8 @@ auth_mongodb_connection: "{{ mongodb_connection }}/auth?authSource=admin"
 auth_super_username: root
 auth_super_password: 36node
 
+auth_bypass_path: /api/auth/v0
+
 web_version: latest
 web_image: "registry.cn-hongkong.aliyuncs.com/36node/stargate:{{ web_version }}"
 web_time: 20210804120000

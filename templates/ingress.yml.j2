@@ -22,8 +22,15 @@ spec:
               serviceName: auth
               servicePort: 80
             path: /auth/v0
-  # tls:
-  #   - hosts:
-  #       - "{{ domain }}"
-  #       - "*.{{ domain }}"
-  #     secretName: "{{ domain }}"
+    - host: "{{ domain }}"
+      http:
+        paths:
+          - backend:
+              serviceName: auth-bypass
+              servicePort: 80
+            path: /api/auth/v0
+  tls:
+    - hosts:
+        - "{{ domain }}"
+        - "*.{{ domain }}"
+      secretName: "{{ domain }}"

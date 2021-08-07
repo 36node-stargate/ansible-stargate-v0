@@ -14,6 +14,7 @@
     template: "{{ item }}"
   with_items:
     - auth.yml.j2
+    - auth-bypass.yml.j2
     - web.yml.j2
     - ingress.yml.j2
   tags:
