@@ -3,6 +3,7 @@
 
 namespace: stargate-v0
 state: present
+ingress_class: traefik
 
 stargate_state: "{{ state }}"
 stargate_namespace: "{{ namespace }}"

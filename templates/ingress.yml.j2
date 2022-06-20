@@ -1,34 +1,43 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: "{{ ingress_name }}"
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: "{{ ingress_class }}"
     cert-manager.io/cluster-issuer: "{{ cert_issuer }}"
 spec:
   rules:
     - host: "{{ domain }}"
       http:
         paths:
-          - backend:
-              serviceName: web
-              servicePort: 80
-            path: /
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port: 
+                  number: 80
     - host: api.{{ domain }}
       http:
         paths:
-          - backend:
-              serviceName: auth
-              servicePort: 80
-            path: /auth/v0
+          - path: /auth/v0
+            pathType: Prefix
+            backend:
+              service:
+                name: auth
+                port: 
+                  number: 80
     - host: "{{ domain }}"
       http:
         paths:
-          - backend:
-              serviceName: auth-bypass
-              servicePort: 80
-            path: /api/auth/v0
+          - path: /api/auth/v0
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-bypass
+                port: 
+                  number: 80
   tls:
     - hosts:
         - "{{ domain }}"
